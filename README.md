@@ -28,7 +28,7 @@ Execute `sync-to.sh` in the `WSL`
 Open your `terminal`/`cmd`
 > ```cmd
 > ssh fyp
-> cd /home/fyp/SD-core/core/
+> cd /home/fyp/SD-core
 > make build
 > make up
 > ```
