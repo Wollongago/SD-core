@@ -1,4 +1,4 @@
-package com.model;
+package com.wollongago.sdcore;
 
 
 import org.springframework.data.annotation.Id;
