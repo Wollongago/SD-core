@@ -1,0 +1,20 @@
+version: "3.10"
+
+services:
+  sd_core:
+    privileged: true
+    build:
+      context: .
+    volumes:
+      - .:/SD-core
+    networks:
+      - sd-core
+    working_dir: /SD-core
+    command: >
+      ./mvnw spring-boot:run
+    ports:
+      - "8000:8000"
+
+networks:
+  sd-core:
+    external: true
