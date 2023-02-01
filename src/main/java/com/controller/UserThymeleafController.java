@@ -27,4 +27,9 @@ public class UserThymeleafController {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
+
+    @GetMapping({"/home","/"})
+    public String home() {
+        return "home";
+    }
 }
