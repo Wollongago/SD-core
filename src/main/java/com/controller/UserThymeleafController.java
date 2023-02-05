@@ -29,7 +29,14 @@ public class UserThymeleafController {
     }
 
     @GetMapping({"/home","/"})
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("pageTitle", "Home");
         return "home";
+    }
+
+    @GetMapping({"/signup"})
+    public String signUp(Model model) {
+        model.addAttribute("pageTitle", "Sign Up");
+        return "signup";
     }
 }
