@@ -19,4 +19,14 @@ public class UserService {
     public Iterable<User> getAllUsers() {
         return userRepo.findAll();
     }
+
+    public User addUser(User user) {
+        return userRepo.save(user);
+    }
+
+    // delete
+    public String deleteUser(User user) {
+        userRepo.delete(user);
+        return "User Deleted";
+    }
 }
