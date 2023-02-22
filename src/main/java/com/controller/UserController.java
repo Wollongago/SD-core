@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.User;
@@ -14,6 +15,7 @@ import com.service.UserService;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/user")
 public class UserController {
     
     private UserService userService;
@@ -23,28 +25,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    // JSON format of all users
     @GetMapping("/all")
-    public Iterable<User> getAllUser() {
+    public Iterable<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    // add user
     @PostMapping("/add")
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
-    // delete user
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String deleteUser(@RequestBody User user) {
         return userService.deleteUser(user);
     }
 
-    // update user
-    @PostMapping("/update")
+    @GetMapping("/update")
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
 
+    
+
+
+    
 }
