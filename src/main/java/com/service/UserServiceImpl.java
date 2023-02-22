@@ -24,9 +24,10 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(user);
     }
 
+
     // delete
-    public String deleteUser(User user) {
-        userRepo.delete(user);
+    public String deleteUser(String id) {
+        userRepo.deleteById(id);
         return "User Deleted";
     }
 
@@ -34,4 +35,13 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         return userRepo.save(user);
     }
+
+    // update user information
+    public User updateUser(String id, User user) {
+        User userToUpdate = userRepo.findById(id).get();
+        userToUpdate.setName(user.getName());
+        userToUpdate.setEmail(user.getEmail());
+        return userRepo.save(userToUpdate);
+    }
+
 }
