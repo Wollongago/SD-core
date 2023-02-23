@@ -29,8 +29,12 @@ public class UserServiceImpl implements UserService {
 
     // delete
     public String deleteUser(String id) {
-        userRepo.deleteById(id);
-        return "User Deleted";
+        if (userRepo.existsById(id)) {
+            userRepo.deleteById(id);
+            return userRepo.existsById(id) ? "User deletion failed" : "User Deleted";
+        } else {
+            return "User Not Found";
+        }
     }
 
     // update
@@ -40,8 +44,7 @@ public class UserServiceImpl implements UserService {
 
     // update user information
     public User updateUser(String id, User user) {
-        Optional<User> existingUser = userRepo.findById(id);
-        if (existingUser.isPresent()) {
+        if (userRepo.existsById(id)) {
             User userToUpdate = userRepo.findById(id).get();
             userToUpdate.setName(user.getName());
             userToUpdate.setEmail(user.getEmail());
