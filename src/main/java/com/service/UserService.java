@@ -1,22 +1,15 @@
 package com.service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.model.User;
-import com.repository.UserRespository;
 
-@Service
-public class UserService {
+public interface UserService {
     
-    private UserRespository userRepo;
+    public Iterable<User> getAllUsers();
 
-    @Autowired
-    public UserService(UserRespository userRepo) {
-        this.userRepo = userRepo;
-    }
+    public User addUser(User user);
 
-    public Iterable<User> getAllUsers() {
-        return userRepo.findAll();
-    }
+    // delete
+    public String deleteUser(String id);
+
+    // update
+    public User updateUser(String id, User user);
 }

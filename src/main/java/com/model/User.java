@@ -3,6 +3,8 @@ package com.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection = "users")
 public class User {
 
@@ -11,6 +13,8 @@ public class User {
 
   public String name;
   public String email;
+
+  @JsonIgnore
   private String password;
 
   public User() {
@@ -31,11 +35,11 @@ public class User {
     this.id = id;
   }
 
-  public String getname() {
+  public String getName() {
     return name;
   }
 
-  public void setname(String name) {
+  public void setName(String name) {
     this.name = name;
   }
 
