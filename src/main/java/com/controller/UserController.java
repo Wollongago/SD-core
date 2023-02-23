@@ -40,10 +40,9 @@ public class UserController {
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable String id, @RequestBody User user) {
-        return userService.updateUser(user);
+        return userService.updateUser(id, user);
         
     }
 
 
-    
 }

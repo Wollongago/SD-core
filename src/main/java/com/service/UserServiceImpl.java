@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,16 +34,20 @@ public class UserServiceImpl implements UserService {
     }
 
     // update
-    public User updateUser(User user) {
-        return userRepo.save(user);
-    }
+    // public User updateUser(User user) {
+    //     return userRepo.save(user);
+    // }
 
     // update user information
     public User updateUser(String id, User user) {
-        User userToUpdate = userRepo.findById(id).get();
-        userToUpdate.setName(user.getName());
-        userToUpdate.setEmail(user.getEmail());
-        return userRepo.save(userToUpdate);
+        Optional<User> existingUser = userRepo.findById(id);
+        if (existingUser.isPresent()) {
+            User userToUpdate = userRepo.findById(id).get();
+            userToUpdate.setName(user.getName());
+            userToUpdate.setEmail(user.getEmail());
+            return userRepo.save(userToUpdate);
+        } else {
+            return null;
+        }
     }
-
 }
