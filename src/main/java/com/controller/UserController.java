@@ -49,6 +49,12 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-
+    // user login endpoint
+    @PostMapping("/login")
+    public User login(@RequestBody Map<String, Object> userData) {
+        String email = (String) userData.get("email");
+        String password = (String) userData.get("password");
+        return userService.login(email, password);
+    }
 
 }
