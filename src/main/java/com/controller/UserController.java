@@ -2,8 +2,10 @@ package com.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,25 +57,28 @@ public class UserController {
         String email = (String) userData.get("email");
         String password = (String) userData.get("password");
         return userService.login(email, password);
+    }
 
     // create user registration endpoint
     @PostMapping("/register")
-    public User registerUser(@RequestBody Map<String, Object> userData) {
+    public ResponseEntity<String>  registerUser(@RequestBody Map<String, Object> userData) {
         // check if user exists with same email
-        User userExists = userService.findByEmail((String) userData.get("email"));
+        Optional<User> userExists = userService.findByEmail((String) userData.get("email"));
         // check if all fields are filled
         if (userData.get("name") == null || userData.get("email") == null || userData.get("password") == null) {
-            return "please fill all fields";
+            return ResponseEntity.badRequest().body("Please fill in all fields.");
         }
         // return null if user exists
-        if (userExists != null) {
-            return "user already exists";
+        if (userExists.isPresent()) {
+            return ResponseEntity.badRequest().body("User already exists.");
         }
         User user = new User();
         user.setName((String) userData.get("name"));
         user.setEmail((String) userData.get("email"));
         user.setPassword((String) userData.get("password"));
-        return userService.addUser(user);
+        userService.addUser(user);
+
+        return ResponseEntity.ok("User created successfully.");
 
     }
 
