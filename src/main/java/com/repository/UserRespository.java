@@ -15,4 +15,7 @@ public interface UserRespository extends MongoRepository<User, String> {
     @Query(value = "{}", fields = "{'password':0}")
     List<User> findAll();
     
+    // query by email
+    @Query(value = "{'email':?0}", fields = "{'password':0}")
+    User findByEmail(String email);
   }

@@ -13,7 +13,11 @@ public interface UserService {
 
     // update
     public User updateUser(String id, User user);
-
+    
     // user login
     public User login(String email, String password);
+
+    // find by email
+    public User findByEmail(String email);
+
 }

@@ -22,7 +22,7 @@ import com.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    
+
     private UserService userService;
 
     @Autowired
@@ -38,7 +38,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable String id) {
         return userService.deleteUser(id);
-    }   
+    }
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable String id, @RequestBody Map<String, Object> userData) {
@@ -55,6 +55,26 @@ public class UserController {
         String email = (String) userData.get("email");
         String password = (String) userData.get("password");
         return userService.login(email, password);
+
+    // create user registration endpoint
+    @PostMapping("/register")
+    public User registerUser(@RequestBody Map<String, Object> userData) {
+        // check if user exists with same email
+        User userExists = userService.findByEmail((String) userData.get("email"));
+        // check if all fields are filled
+        if (userData.get("name") == null || userData.get("email") == null || userData.get("password") == null) {
+            return "please fill all fields";
+        }
+        // return null if user exists
+        if (userExists != null) {
+            return "user already exists";
+        }
+        User user = new User();
+        user.setName((String) userData.get("name"));
+        user.setEmail((String) userData.get("email"));
+        user.setPassword((String) userData.get("password"));
+        return userService.addUser(user);
+
     }
 
 }
