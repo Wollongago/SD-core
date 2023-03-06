@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.Optional;
+
 import com.model.User;
 
 public interface UserService {
@@ -18,6 +20,6 @@ public interface UserService {
     public User login(String email, String password);
 
     // find by email
-    public User findByEmail(String email);
+    public Optional<User> findByEmail(String email);
 
 }

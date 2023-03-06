@@ -66,11 +66,10 @@ public class UserServiceImpl implements UserService {
         } else {
             return null;
         }
+    }
 
-    // find by email
-    public User findByEmail(String email) {
-        // query user by email
+    //find by email
+    public Optional<User> findByEmail(String email) {
         return userRepo.findByEmail(email);
-
     }
 }
