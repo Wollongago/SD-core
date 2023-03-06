@@ -53,9 +53,24 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
+    // user login
+    public User login(String email, String password) {
+        Optional<User> user = userRepo.findByEmail(email);
+        if (user.isPresent()) {
+            if (user.get().getPassword().equals(password)) {
+                return user.get();
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
     // find by email
     public User findByEmail(String email) {
         // query user by email
         return userRepo.findByEmail(email);
+
     }
 }

@@ -1,8 +1,9 @@
 package com.service;
+
 import com.model.User;
 
 public interface UserService {
-    
+
     public Iterable<User> getAllUsers();
 
     public User addUser(User user);
@@ -12,7 +13,11 @@ public interface UserService {
 
     // update
     public User updateUser(String id, User user);
+    
+    // user login
+    public User login(String email, String password);
 
     // find by email
     public User findByEmail(String email);
+
 }
