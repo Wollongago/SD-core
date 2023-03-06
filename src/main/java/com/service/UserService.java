@@ -12,4 +12,7 @@ public interface UserService {
 
     // update
     public User updateUser(String id, User user);
+
+    // find by email
+    public User findByEmail(String email);
 }

@@ -10,7 +10,7 @@ import com.repository.UserRespository;
 
 @Service
 public class UserServiceImpl implements UserService {
-    
+
     private UserRespository userRepo;
 
     @Autowired
@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(user);
     }
 
-
     // delete
     public String deleteUser(String id) {
         if (userRepo.existsById(id)) {
@@ -39,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     // update
     // public User updateUser(User user) {
-    //     return userRepo.save(user);
+    // return userRepo.save(user);
     // }
 
     // update user information
@@ -52,5 +51,11 @@ public class UserServiceImpl implements UserService {
         } else {
             return null;
         }
+    }
+
+    // find by email
+    public User findByEmail(String email) {
+        // query user by email
+        return userRepo.findByEmail(email);
     }
 }
