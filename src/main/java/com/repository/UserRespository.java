@@ -2,6 +2,7 @@ package com.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -17,5 +18,5 @@ public interface UserRespository extends MongoRepository<User, String> {
     
     // query by email
     @Query(value = "{'email':?0}", fields = "{'password':0}")
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
   }
