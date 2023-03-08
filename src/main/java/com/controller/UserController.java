@@ -55,6 +55,7 @@ public class UserController {
         String email = (String) userData.get("email");
         String password = (String) userData.get("password");
         return userService.login(email, password);
+    }
 
     // create user registration endpoint
     @PostMapping("/register")
