@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,7 @@ public interface CreatedTourService {
     public String deleteCreatedTour(String id);
     
     public List<CreatedTour> getCreatedToursByTourGuideId(String tourGuideId);
+
+    public CreatedTour createTour(String name, String description, String location, double price,
+            List<Date> availableDates, int maximumCapacity, String guideId);
 }
