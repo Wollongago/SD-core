@@ -2,6 +2,7 @@ package com.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,14 @@ public class CreatedTourServiceImpl implements CreatedTourService {
     
     public List<CreatedTour> getCreatedToursByTourGuideId(String tourGuideId) {
         return createdTourRepo.findByTourGuideId(tourGuideId);
+    }
+
+
+    @Override
+    public CreatedTour createTour(String name, String description, String location, double price,
+            List<Date> availableDates, int maximumCapacity, String guideId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createTour'");
     }
 }
 
