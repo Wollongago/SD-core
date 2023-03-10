@@ -2,6 +2,7 @@ package com.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -14,4 +15,7 @@ public interface CreatedTourRepository extends MongoRepository<CreatedTour, Stri
     //findByTourGuideId
     @Query(value = "{'tourGuideId':?0}", fields = "{'password':0}")
     List<CreatedTour> findByTourGuideId(String tourGuideId);
+
+    // find by id
+    Optional<CreatedTour> findById(String id);
 }
