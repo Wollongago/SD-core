@@ -76,10 +76,17 @@ public class UserController {
         user.setName((String) userData.get("name"));
         user.setEmail((String) userData.get("email"));
         user.setPassword((String) userData.get("password"));
+        user.setTourGuide((Boolean) userData.get("tourProvider"));
         userService.addUser(user);
 
         return ResponseEntity.ok("User created successfully.");
 
+    }
+
+    // get user by id
+    @GetMapping("/{id}")
+    public Optional<User> getUserByEmail(@PathVariable String id) {
+        return userService.findByEmail(id);
     }
 
 }
