@@ -41,15 +41,23 @@ public class TourController {
     // create tour
     @PostMapping("/create")
     public CreatedTour createTour(@RequestBody Map<String, Object> tourData) {
-        String name = (String) tourData.get("name");
-        String description = (String) tourData.get("description");
-        String location = (String) tourData.get("location");
-        double price = (double) tourData.get("price");
-        List<Date> availableDates = (List<Date>) tourData.get("availableDates");
-        int maximumCapacity = (int) tourData.get("maximumCapacity");
-        String guideId = (String) tourData.get("guideId");
+        CreatedTour newTour = new CreatedTour();
+        newTour.setName((String) tourData.get("name"));
+        newTour.setDescription((String) tourData.get("description"));
+        newTour.setPrice((Double) tourData.get("price"));
+        newTour.setGuideId((String) tourData.get("guideId"));
+        newTour.setMaximumCapacity((Integer) tourData.get("maximumCapacity"));
+        newTour.setImage((String) tourData.get("image"));
+        newTour.setLocation((String) tourData.get("location"));
+        // newTour.setAvailableDates((List<Date>) tourData.get("availableDates"));
 
-        return createdTourService.createTour(name, description, location, price, availableDates, maximumCapacity, guideId);
+        return createdTourService.addTour(newTour);
+    }
+
+    // get tour by id
+    @GetMapping("/{id}")
+    public Optional<CreatedTour> getTourById(@PathVariable String id) {
+        return createdTourService.getCreatedTourById(id);
     }
 
 
