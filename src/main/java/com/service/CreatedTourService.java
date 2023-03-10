@@ -11,8 +11,7 @@ public interface CreatedTourService {
     public List<CreatedTour> getAllCreatedTours();
     
     public Optional<CreatedTour> getCreatedTourById(String id);
-    
-    public CreatedTour createTour(CreatedTour createdTour);
+
     
     public CreatedTour updateCreatedTour(String id, CreatedTour createdTour);
     
@@ -20,6 +19,6 @@ public interface CreatedTourService {
     
     public List<CreatedTour> getCreatedToursByTourGuideId(String tourGuideId);
 
-    public CreatedTour createTour(String name, String description, String location, double price,
-            List<Date> availableDates, int maximumCapacity, String guideId);
+    public CreatedTour addTour(CreatedTour createdTour);
+
 }
