@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "createdtours")
 public class CreatedTour {
     @Id
     private String id;
@@ -13,18 +15,19 @@ public class CreatedTour {
     private String description;
     private String location;
     private double price;
-    private List<Date> availableDates;
+    // private List<Date> availableDates;
     private int maximumCapacity;
     private String guideId;
+    private String image;
 
     public CreatedTour() {}
 
-    public CreatedTour(String name, String description, String location, double price, List<Date> availableDates, int maximumCapacity, String guideId) {
+    public CreatedTour(String name, String description, String location, double price, int maximumCapacity, String guideId) {
         this.name = name;
         this.description = description;
         this.location = location;
         this.price = price;
-        this.availableDates = availableDates;
+        // this.availableDates = availableDates;
         this.maximumCapacity = maximumCapacity;
         this.guideId = guideId;
     }
@@ -69,13 +72,13 @@ public class CreatedTour {
         this.price = price;
     }
 
-    public List<Date> getAvailableDates() {
-        return availableDates;
-    }
+    // public List<Date> getAvailableDates() {
+    //     return availableDates;
+    // }
 
-    public void setAvailableDates(List<Date> availableDates) {
-        this.availableDates = availableDates;
-    }
+    // public void setAvailableDates(List<Date> availableDates) {
+    //     this.availableDates = availableDates;
+    // }
 
     public int getMaximumCapacity() {
         return maximumCapacity;
@@ -91,5 +94,13 @@ public class CreatedTour {
 
     public void setGuideId(String guideId) {
         this.guideId = guideId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
