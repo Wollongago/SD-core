@@ -28,10 +28,6 @@ public class CreatedTourServiceImpl implements CreatedTourService {
         return createdTourRepo.findById(id);
     }
 
-    
-    public CreatedTour createTour(CreatedTour createdTour) {
-        return createdTourRepo.save(createdTour);
-    }
 
     
     public CreatedTour updateCreatedTour(String id, CreatedTour createdTour) {
@@ -60,11 +56,10 @@ public class CreatedTourServiceImpl implements CreatedTourService {
     }
 
 
-    @Override
-    public CreatedTour createTour(String name, String description, String location, double price,
-            List<Date> availableDates, int maximumCapacity, String guideId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createTour'");
+    // add tour
+    public CreatedTour addTour(CreatedTour createdTour) {
+        return createdTourRepo.save(createdTour);
     }
+    
 }
 
