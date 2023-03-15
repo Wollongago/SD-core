@@ -60,5 +60,21 @@ public class TourController {
         return createdTourService.getCreatedTourById(id);
     }
 
+    // update tour
+    @PutMapping("/{id}")
+    public CreatedTour updateTour(@PathVariable String id, @RequestBody Map<String, Object> tourData) {
+        CreatedTour updatedTour = new CreatedTour();
+        updatedTour.setId(id);
+        updatedTour.setName((String) tourData.get("name"));
+        updatedTour.setDescription((String) tourData.get("description"));
+        updatedTour.setPrice((Double) tourData.get("price"));
+        updatedTour.setGuideId((String) tourData.get("guideId"));
+        updatedTour.setMaximumCapacity((Integer) tourData.get("maximumCapacity"));
+        updatedTour.setImage((String) tourData.get("image"));
+        updatedTour.setLocation((String) tourData.get("location"));
+        return createdTourService.updateCreatedTour(id, updatedTour);
+
+    }
+
 
 }

@@ -30,14 +30,17 @@ public class CreatedTourServiceImpl implements CreatedTourService {
 
 
     
+    //update tour
     public CreatedTour updateCreatedTour(String id, CreatedTour createdTour) {
-        Optional<CreatedTour> existingCreatedTour = createdTourRepo.findById(id);
-        if (existingCreatedTour.isPresent()) {
-            createdTour.setId(id);
-            return createdTourRepo.save(createdTour);
-        } else {
-            throw new ResourceNotFoundException();
-        }
+        CreatedTour tourToUpdate = createdTourRepo.findById(id).get();
+        tourToUpdate.setName(createdTour.getName());
+        tourToUpdate.setDescription(createdTour.getDescription());
+        tourToUpdate.setPrice(createdTour.getPrice());
+        tourToUpdate.setMaximumCapacity(createdTour.getMaximumCapacity());
+        tourToUpdate.setImage(createdTour.getImage());
+        tourToUpdate.setLocation(createdTour.getLocation());
+        tourToUpdate.setGuideId(createdTour.getGuideId());
+        return createdTourRepo.save(tourToUpdate);
     }
 
     
