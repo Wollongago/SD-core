@@ -89,4 +89,12 @@ public class UserController {
         return userService.findByEmail(email);
     }
 
+    // update booking which takes a booking id and stores into the user's booking list
+    @PutMapping("/{id}/booking")
+    public User updateBooking(@PathVariable String id, @RequestBody String newBooking) {
+        return userService.updateBooking(id, newBooking);
+    }
+    
+
+
 }

@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +79,19 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(String id) {
         return userRepo.findById(id);
     }
+
+    // update booking of user
+    public User updateBooking(String id, String newBooking) {
+        if (userRepo.existsById(id)) {
+            User userToUpdate = userRepo.findById(id).get();
+            if (userToUpdate.getBookings() == null) {
+                userToUpdate.setBookings( new ArrayList<String>());
+              }
+            userToUpdate.getBookings().add(newBooking);
+            return userRepo.save(userToUpdate);
+        } else {
+            return null;
+        }
+    }
+
 }

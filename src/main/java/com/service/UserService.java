@@ -25,4 +25,6 @@ public interface UserService {
     // find by id
     public Optional<User> findById(String id);
 
+    // update booking
+    public User updateBooking(String id, String newBooking);
 }

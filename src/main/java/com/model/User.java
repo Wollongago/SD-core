@@ -23,7 +23,7 @@ public class User {
   private boolean isTourProvider;
 
   // For tourists
-  private List<TourBooking> bookings;
+  private List<String> bookings;
 
   // For tour guides
   private List<CreatedTour> createdTours;
@@ -40,7 +40,7 @@ public class User {
     if (isTourProvider) {
       this.createdTours = new ArrayList<CreatedTour>();
     } else {
-      this.bookings = new ArrayList<TourBooking>();
+      this.bookings = new ArrayList<String>();
     }
   }
 
@@ -85,15 +85,15 @@ public class User {
     if (isTourProvider) {
       this.createdTours = new ArrayList<CreatedTour>();
     } else {
-      this.bookings = new ArrayList<TourBooking>();
+      this.bookings = new ArrayList<String>();
     }
   }
 
-  public List<TourBooking> getBookings() {
+  public List<String> getBookings() {
     return bookings;
   }
 
-  public void setBookings(List<TourBooking> bookings) {
+  public void setBookings( List<String> bookings) {
     this.bookings = bookings;
   }
 
