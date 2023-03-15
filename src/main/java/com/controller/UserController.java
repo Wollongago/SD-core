@@ -83,10 +83,10 @@ public class UserController {
 
     }
 
-    // get user by id
-    @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable String id) {
-        return userService.findById(id);
+    // get uuser by email
+    @GetMapping("/{email}")
+    public Optional<User> getUserByEmail(@PathVariable String email) {
+        return userService.findByEmail(email);
     }
 
 }
