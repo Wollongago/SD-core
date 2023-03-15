@@ -22,4 +22,7 @@ public interface UserService {
     // find by email
     public Optional<User> findByEmail(String email);
 
+    // find by id
+    public Optional<User> findById(String id);
+
 }

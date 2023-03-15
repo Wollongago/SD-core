@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private UserRespository userRepo;
 
     @Autowired
-    public void UserServiceIm(UserRespository userRepo) {
+    public void UserService(UserRespository userRepo) {
         this.userRepo = userRepo;
     }
 
@@ -71,5 +71,10 @@ public class UserServiceImpl implements UserService {
     //find by email
     public Optional<User> findByEmail(String email) {
         return userRepo.findByEmail(email);
+    }
+
+    // find by id
+    public Optional<User> findById(String id) {
+        return userRepo.findById(id);
     }
 }
