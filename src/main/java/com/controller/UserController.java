@@ -2,8 +2,10 @@ package com.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,32 +66,45 @@ public class UserController {
         return userService.login(email, password);
     }
 
-    // logout endpoint
-    @PostMapping("/logout")
-    public ResponseEntity logout() {
-        // do nothing for now - just return a response
-        return ResponseEntity.ok("User logged out successfully");
-    }
-
     // create user registration endpoint
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Map<String, Object> userData) {
+    public ResponseEntity<String>  registerUser(@RequestBody Map<String, Object> userData) {
+
         // check if user exists with same email
-        User userExists = userService.findByEmail((String) userData.get("email"));
+        Optional<User> userExists = userService.findByEmail((String) userData.get("email"));
         // check if all fields are filled
         if (userData.get("name") == null || userData.get("email") == null || userData.get("password") == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please fill all fields");
+            return ResponseEntity.badRequest().body("Please fill in all fields.");
         }
         // return null if user exists
-        if (userExists != null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
+        if (userExists.isPresent()) {
+            return ResponseEntity.badRequest().body("User already exists.");
+
         }
         User user = new User();
         user.setName((String) userData.get("name"));
         user.setEmail((String) userData.get("email"));
         user.setPassword((String) userData.get("password"));
+        user.setTourGuide((Boolean) userData.get("tourProvider"));
         userService.addUser(user);
-        return ResponseEntity.ok("User registered successfully");
+
+        return ResponseEntity.ok("User created successfully.");
+
     }
+
+    // get uuser by email
+    @GetMapping("/{email}")
+    public Optional<User> getUserByEmail(@PathVariable String email) {
+        return userService.findByEmail(email);
+
+    }
+
+    // update booking which takes a booking id and stores into the user's booking list
+    @PutMapping("/{id}/booking")
+    public User updateBooking(@PathVariable String id, @RequestBody String newBooking) {
+        return userService.updateBooking(id, newBooking);
+    }
+    
+
 
 }
