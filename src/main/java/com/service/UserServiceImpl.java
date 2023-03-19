@@ -55,13 +55,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
     // user login
     public User login(String email, String password) {
-        Optional<User> user = userRepo.findByEmail(email);
-        if (user.isPresent()) {
-            if (user.get().getPassword().equals(password)) {
-                return user.get();
+        User user = userRepo.findByEmail(email);
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                return user;
             } else {
                 return null;
             }
@@ -78,6 +77,7 @@ public class UserServiceImpl implements UserService {
     // find by id
     public Optional<User> findById(String id) {
         return userRepo.findById(id);
+
     }
 
     // update booking of user

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import com.model.User;
 import com.service.UserService;
@@ -53,15 +55,21 @@ public class UserController {
 
     // user login endpoint
     @PostMapping("/login")
-    public User login(@RequestBody Map<String, Object> userData) {
+    public User login(@RequestBody Map<String, Object> userData) throws Exception {
         String email = (String) userData.get("email");
         String password = (String) userData.get("password");
+
+        if (email == null || password == null) {
+            throw new Exception("Email and password fields cannot be empty");
+        }
+
         return userService.login(email, password);
     }
 
     // create user registration endpoint
     @PostMapping("/register")
     public ResponseEntity<String>  registerUser(@RequestBody Map<String, Object> userData) {
+
         // check if user exists with same email
         Optional<User> userExists = userService.findByEmail((String) userData.get("email"));
         // check if all fields are filled
@@ -71,6 +79,7 @@ public class UserController {
         // return null if user exists
         if (userExists.isPresent()) {
             return ResponseEntity.badRequest().body("User already exists.");
+
         }
         User user = new User();
         user.setName((String) userData.get("name"));
@@ -87,6 +96,7 @@ public class UserController {
     @GetMapping("/{email}")
     public Optional<User> getUserByEmail(@PathVariable String email) {
         return userService.findByEmail(email);
+
     }
 
     // update booking which takes a booking id and stores into the user's booking list

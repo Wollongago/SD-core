@@ -1,6 +1,5 @@
 package com.repository;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.model.User;
 
-@RepositoryRestResource(path="users")
+@RepositoryRestResource(path = "users")
 public interface UserRespository extends MongoRepository<User, String> {
     // Optional<User> findByUsername(String username);
     @Query(value = "{}", fields = "{'password':0}")
@@ -22,3 +21,4 @@ public interface UserRespository extends MongoRepository<User, String> {
     //find by id
     Optional<User> findById(String id);
   }
+
